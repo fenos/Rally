@@ -2,6 +2,8 @@ Rally
 =====
 
 [![Build Status](https://travis-ci.org/fenos/Rally.svg?branch=master)](https://travis-ci.org/fenos/Rally)
+[![ProjectStatus](http://stillmaintained.com/fenos/Rally.png)](http://stillmaintained.com/fenos/Rally)
+[![Latest Stable Version](https://poser.pugx.org/fenos/rally/v/stable.png)](https://packagist.org/packages/fenos/rally)
 [![License](https://poser.pugx.org/fenos/rally/license.png)](https://packagist.org/packages/fenos/rally)
 
 Follow, Let Follow you, Follow with Rally. Rally is a plugin that implement in your application the follow system. It is quick to implement on your laravel project.
