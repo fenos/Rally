@@ -6,14 +6,14 @@ It give you the freedom to create your own followers system. It is can be polymo
 
 * [Installation](#installation)
 * [Documentation](#documentation)
-    [Follow](#follow)
-    [unFollow](#unfollow)
-    [Check if Is follow of](#check-if-is-follow-of)
-    [Get Lists of followers](#get-lists-of-followers)
-    [Count Followers](#count-followers)
-    [Note](#note)
-    [Tests](#tests)
-    [Credits](#credits)
+    * [Follow](#follow)
+    * [unFollow](#unfollow)
+    * [Check if Is follow of](#check-if-is-follow-of)
+    * [Get Lists of followers](#get-lists-of-followers)
+    * [Count Followers](#count-followers)
+    * [Note](#note)
+    * [Tests](#tests)
+    * [Credits](#credits)
 
 
 ## Installation ##
@@ -59,7 +59,7 @@ php artisan migrate --package="fenos/rally"
 
 #### Include relations ###
 
-Rally comes with some relations already setted for you, you just need to insert the `trait` that i done for you in all your model you wish to have relations with Rally.
+Rally comes with some relations already setted for you, you just need to insert the `trait` that I made for you in all your models you wish to have relations with Rally.
 
 ~~~
 
@@ -75,7 +75,7 @@ That's it your have done.
 ## Documentation ##
 
 How i said on the installation, Rally can be **Polymorphic**, it means that if you have `Users` and `Teams` as entity of your application they can follow between them. But it is just up to you. If you realize that
-you don't need of it. You can keep it as a single model binding.
+you don't need of it, You can keep it as a single model binding.
 
 The key to enable or disable the polymorphic relation is in the configuration files. You just need to push them and change the key polymorphic to `true`.
 if instead you want to keep the plugin as 1 model but the `User` model is not your main model change it ;)
