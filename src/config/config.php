@@ -2,7 +2,7 @@
 
 return array(
 
-    'polymorphic' => true,
+    'polymorphic' => false,
 
     'model'       => "User"
 
