@@ -118,6 +118,45 @@ class RallyPolymorphicRepositoryTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Fenos\Rally\Models\Follower',$result);
     }
 
+    public function test_count_lists_of_following()
+    {
+        $listsFollowRelation = [
+
+            'follower_type' => 'User',
+            'follower_id'   => 1,
+        ];
+
+        $mockRepo = m::mock('Fenos\Rally\Repositories\RallyPolymorphicRepository[addFilters]',[$this->follower,$this->db]);
+
+        $this->follower->shouldReceive('with')
+            ->once()
+            ->with('follower')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('where')
+            ->with('follower_type','User')
+            ->once()
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('where')
+            ->once()
+            ->with('follower_id',1)
+            ->andReturn($this->follower);
+
+        $mockRepo->shouldReceive('addFilters')
+            ->once()
+            ->with($this->follower,[])
+            ->andReturn(null);
+
+        $this->follower->shouldReceive('get')
+            ->once()
+            ->andReturn($this->follower);
+
+        $result = $mockRepo->listsFollowing($listsFollowRelation,[]);
+
+        $this->assertInstanceOf('Fenos\Rally\Models\Follower',$result);
+    }
+
     public function test_count_followers()
     {
         $countFollowRelation = [
@@ -150,6 +189,42 @@ class RallyPolymorphicRepositoryTest extends PHPUnit_Framework_TestCase {
             ->andReturn($this->follower);
 
         $result = $this->rallyRepo->countFollowers($countFollowRelation);
+
+        $this->assertInstanceOf('Fenos\Rally\Models\Follower',$result);
+    }
+
+    public function test_count_following()
+    {
+        $countFollowRelation = [
+
+            'follower_type' => 'User',
+            'follower_id'   => 1,
+        ];
+
+        $this->follower->shouldReceive('select')
+            ->once()
+            ->andReturn($this->follower);
+
+        $this->db->shouldReceive('raw')
+            ->once()
+            ->with('Count(*) as numbers_followers')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('where')
+            ->once()
+            ->with('follower_type','User')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('where')
+            ->once()
+            ->with('follower_id',1)
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('first')
+            ->once()
+            ->andReturn($this->follower);
+
+        $result = $this->rallyRepo->countFollowing($countFollowRelation);
 
         $this->assertInstanceOf('Fenos\Rally\Models\Follower',$result);
     }

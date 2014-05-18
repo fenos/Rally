@@ -74,6 +74,22 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
 
     /**
      * @param array $followed
+     * @param $filters
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function listsFollowing(array $followed,$filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('follower_type', $followed['follower_type'])
+            ->where('follower_id',$followed['follower_id']);
+
+        $this->addFilters($lists,$filters);
+
+        return $lists->get();
+    }
+
+    /**
+     * @param array $followed
      * @return mixed
      */
     public function countFollowers(array $followed)
@@ -81,6 +97,17 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
         return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
             ->where('followed_type', $followed['follower_type'])
             ->where('followed_id',$followed['follower_id'])->first();
+    }
+
+    /**
+     * @param array $followed
+     * @return mixed
+     */
+    public function countFollowing(array $followed)
+    {
+        return $this->follow->select($this->db->raw('Count(*) as numbers_followers'))
+            ->where('follower_type', $followed['follower_type'])
+            ->where('follower_id',$followed['follower_id'])->first();
     }
 
 }

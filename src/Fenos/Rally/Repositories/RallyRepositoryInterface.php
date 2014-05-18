@@ -9,7 +9,6 @@
 
 namespace Fenos\Rally\Repositories;
 
-
 /**
  * Interface RallyRepositoryInterface
  * @package Fenos\Rally\Repositories
@@ -40,6 +39,13 @@ interface RallyRepositoryInterface {
      * @return mixed
      */
     public function listsFollowers(array $followed,$filters);
+
+    /**
+     * @param array $followed
+     * @param $filters
+     * @return mixed
+     */
+    public function listsFollowing(array $followed,$filters);
 
     /**
      * @param array $followed

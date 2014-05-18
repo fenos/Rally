@@ -150,6 +150,19 @@ class Rally {
     }
 
     /**
+     * Get list of following
+     *
+     * @param array $filters
+     * @return \Illuminate\Database\Eloquent\Collection|mixed|static[]
+     */
+    public function getListsFollowing(array $filters = [])
+    {
+        $this->checkFollowerInformation();
+
+        return $this->rallyRepository->listsFollowing($this->follower,$filters);
+    }
+
+    /**
      * Unfollow Someone
      *
      * @param $followed_type
@@ -195,6 +208,19 @@ class Rally {
         $this->checkFollowerInformation();
 
         return $this->rallyRepository->countFollowers($this->follower);
+    }
+
+    /**
+     * Count following
+     *
+     * @return mixed
+     */
+    public function countFollowing()
+    {
+        // check that there are the informations of the follower
+        $this->checkFollowerInformation();
+
+        return $this->rallyRepository->countFollowing($this->follower);
     }
 
     /**
@@ -266,6 +292,9 @@ class Rally {
         $this->follower['follower_id'] = $follower_id;
     }
 
+    /**
+     * @param $follower_id
+     */
     public function setFollower($follower_id)
     {
         $this->follower['follower_id'] = $follower_id;
