@@ -47,7 +47,7 @@ Add the following string to **app/config/app.php**
 **Aliases array:**
 
 ~~~
-'Rally'	=> 'Fenos\Rally\Facades\Rally'
+'Rally'    => 'Fenos\Rally\Facades\Rally'
 ~~~
 
 ### Step 3 ###

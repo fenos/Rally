@@ -14,4 +14,4 @@ class Rally extends Facade {
      */
     protected static function getFacadeAccessor() { return 'rally'; }
 
-} 
+}

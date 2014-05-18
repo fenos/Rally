@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by Fabrizio Fenoglio.
- * 
+ *
  * @package Rally v1.0.0
  * Released under MIT Licence
- * 
+ *
  */
 
 namespace Fenos\Rally\Models;
@@ -32,4 +32,4 @@ trait Relations {
         return $this->morphMany('Fenos\Rally\Models\Follower','follower');
     }
 
-} 
+}

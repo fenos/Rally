@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by Fabrizio Fenoglio.
- * 
+ *
  * @package Rally v1.0.0
  * Released under MIT Licence
- * 
+ *
  */
 
 use Fenos\Rally\Rally;
@@ -492,4 +492,4 @@ class RallyTest extends PHPUnit_Framework_TestCase {
         $this->assertNull($result);
     }
 }
- 
+

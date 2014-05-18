@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by Fabrizio Fenoglio.
- * 
+ *
  * @package Rally v1.0.0
  * Released under MIT Licence
- * 
+ *
  */
 
 namespace Fenos\Rally\Models;
@@ -37,4 +37,4 @@ class Follower extends Model {
         return $this->hasOne(\Config::get('rally::model'),'follower_id');
     }
 
-} 
+}
