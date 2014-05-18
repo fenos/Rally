@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by Fabrizio Fenoglio.
- * 
+ *
  * @package Rally v1.0.0
  * Released under MIT Licence
- * 
+ *
  */
 
 use Mockery as m;
@@ -165,4 +165,4 @@ class RallyRepositoryTest extends PHPUnit_Framework_TestCase {
     }
 
 }
- 
+

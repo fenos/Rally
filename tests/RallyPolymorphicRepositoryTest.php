@@ -1,10 +1,10 @@
 <?php
 /**
  * Created by Fabrizio Fenoglio.
- * 
+ *
  * @package Rally v1.0.0
  * Released under MIT Licence
- * 
+ *
  */
 
 use Fenos\Rally\Repositories\RallyPolymorphicRepository;
@@ -154,4 +154,4 @@ class RallyPolymorphicRepositoryTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('Fenos\Rally\Models\Follower',$result);
     }
 }
- 
+
