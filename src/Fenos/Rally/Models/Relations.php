@@ -19,7 +19,7 @@ trait Relations {
             return $this->hasMany('Fenos\Rally\Models\Follower','followed_id');
         }
 
-        return $this->morphMany('Fenos\Rally\Models\Follwer','follower');
+        return $this->morphMany('Fenos\Rally\Models\Follower','follower');
     }
 
     public function followed()
