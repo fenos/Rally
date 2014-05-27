@@ -80,6 +80,11 @@ class RallyRepository implements RallyRepositoryInterface {
 
         $this->addFilters($lists,$filters);
 
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+
         return $lists->get();
     }
 
@@ -94,6 +99,11 @@ class RallyRepository implements RallyRepositoryInterface {
             ->where('follower_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
 
         return $lists->get();
     }
@@ -139,11 +149,6 @@ class RallyRepository implements RallyRepositoryInterface {
                 if ($key == "limit")
                 {
                     $objectBuilder->{$key}($filter);
-                }
-
-                if ($key == "paginate")
-                {
-                    return $objectBuilder->{$key}($filter);
                 }
             }
         }

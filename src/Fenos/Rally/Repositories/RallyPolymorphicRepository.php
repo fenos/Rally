@@ -69,6 +69,12 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
 
         $this->addFilters($lists,$filters);
 
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+
+
         return $lists->get();
     }
 
@@ -84,6 +90,11 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
             ->where('follower_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
 
         return $lists->get();
     }
