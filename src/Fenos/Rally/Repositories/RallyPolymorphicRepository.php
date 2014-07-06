@@ -160,5 +160,7 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
         {
             return $lists->paginate($filters['paginate']);
         }
+
+        return $lists;
     }
 }

@@ -154,4 +154,25 @@ class RallyRepository implements RallyRepositoryInterface {
         }
     }
 
+    /**
+     * Initialize empty query
+     *
+     * @param       $followed
+     * @param array $filters
+     * @return mixed
+     */
+    public function emptyQuery($followed, array $filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('followed_id',$followed['follower_id']);
+
+        $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+
+        return $lists;
+    }
 }
