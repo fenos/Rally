@@ -52,4 +52,13 @@ interface RallyRepositoryInterface {
      * @return mixed
      */
     public function countFollowers(array $followed);
+
+    /**
+     * Initialize empty query
+     *
+     * @param       $followed
+     * @param array $filters
+     * @return mixed
+     */
+    public function emptyQuery($followed,array $filters);
 }

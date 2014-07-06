@@ -74,6 +74,28 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
             return $lists->paginate($filters['paginate']);
         }
 
+        return $lists->get();
+    }
+
+    /**
+     * @param       $entity_id
+     * @param       $entity_type
+     * @param array $followed
+     * @param       $filters
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Pagination\Paginator|static[]
+     */
+    public function listsWithImFollow($entity_id,$entity_type,array $followed,$filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('followed_type', $followed['follower_type'])
+            ->where('followed_id',$followed['follower_id']);
+
+        $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
 
         return $lists->get();
     }
@@ -121,4 +143,22 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
             ->where('follower_id',$followed['follower_id'])->first();
     }
 
+    /**
+     * @param       $followed
+     * @param array $filters
+     * @return \Illuminate\Pagination\Paginator
+     */
+    public function emptyQuery($followed,array $filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('followed_type', $followed['follower_type'])
+            ->where('followed_id',$followed['follower_id']);
+
+        $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+    }
 }

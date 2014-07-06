@@ -70,7 +70,6 @@ class Rally {
             $this->follower['follower_id'] = $follower_type;
         }
 
-
         return $this;
     }
 
@@ -197,6 +196,35 @@ class Rally {
     }
 
     /**
+     * Get empty Query
+     *
+     * @param array $filters
+     * @return mixed
+     */
+    public function emptyQuery($filters = [])
+    {
+        $this->checkFollowerInformation();
+
+        return $this->rallyRepository->emptyQuery($this->follower,$filters);
+    }
+
+    /**
+     * Get list of followers knowing
+     * if you are follower or no
+     *
+     * @param       $entity_id
+     * @param       $entity_type
+     * @param array $filters
+     * @return mixed
+     */
+    public function listsWithImFollow($entity_id,$entity_type,array $filters = [])
+    {
+        $this->checkFollowerInformation();
+
+        return $this->rallyRepository->listsWithImFollow($this->follower,$entity_id,$entity_type,$filters);
+    }
+
+    /**
      * Get only the number of followers
      *
      * @return mixed
@@ -299,7 +327,6 @@ class Rally {
     {
         $this->follower['follower_id'] = $follower_id;
     }
-
 }
 
 // Rally::follower('Team',$team_id)->follow('User',$user_id);
