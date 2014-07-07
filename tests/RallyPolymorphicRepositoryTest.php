@@ -116,7 +116,7 @@ class RallyPolymorphicRepositoryTest extends PHPUnit_Framework_TestCase {
 
         $this->follower->shouldReceive('groupBy')
             ->once()
-            ->with('fol.follower_id')
+            ->with('fol.followed_id')
             ->andReturn($this->follower);
 
         $this->follower->shouldReceive('select')

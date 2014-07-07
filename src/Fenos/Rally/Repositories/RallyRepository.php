@@ -79,7 +79,7 @@ class RallyRepository implements RallyRepositoryInterface {
             ->where('followers.followed_id',$followed['follower_id'])
             ->leftJoin('followers as fol','followers.follower_id','=','fol.followed_id')
             ->groupBy('followers.followed_id')
-            ->groupBy('fol.follower_id')
+            ->groupBy('fol.followed_id')
             ->select('followers.*','fol.follower_id as fol_id');
 
         $this->addFilters($lists,$filters);
