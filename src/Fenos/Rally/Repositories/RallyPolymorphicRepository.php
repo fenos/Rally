@@ -64,8 +64,12 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
     public function listsFollowers(array $followed,$filters)
     {
         $lists = $this->follow->with('follower')
-                              ->where('followed_type', $followed['follower_type'])
-                              ->where('followed_id',$followed['follower_id']);
+                              ->where('followers.followed_type', $followed['follower_type'])
+                              ->where('followers.followed_id',$followed['follower_id'])
+                              ->leftJoin('followers as fol','followers.follower_id','=','fol.followed_id')
+                              ->groupBy('followers.followed_id')
+                              ->groupBy('fol.follower_id')
+                              ->select('followers.*','fol.follower_id as fol_id');
 
         $this->addFilters($lists,$filters);
 
@@ -146,20 +150,15 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
     /**
      * @param       $followed
      * @param array $filters
-     * @return \Illuminate\Pagination\Paginator
+     * @return mixed
      */
     public function emptyQuery($followed,array $filters)
     {
         $lists = $this->follow->with('follower')
-            ->where('followed_type', $followed['follower_type'])
-            ->where('followed_id',$followed['follower_id']);
+            ->where('followers.followed_type', $followed['follower_type'])
+            ->where('followers.followed_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
-
-        if (array_key_exists('paginate',$filters))
-        {
-            return $lists->paginate($filters['paginate']);
-        }
 
         return $lists;
     }

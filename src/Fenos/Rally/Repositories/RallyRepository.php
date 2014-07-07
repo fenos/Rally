@@ -76,7 +76,11 @@ class RallyRepository implements RallyRepositoryInterface {
     public function listsFollowers(array $followed,$filters)
     {
         $lists = $this->follow->with('follower')
-            ->where('followed_id',$followed['follower_id']);
+            ->where('followers.followed_id',$followed['follower_id'])
+            ->leftJoin('followers as fol','followers.follower_id','=','fol.followed_id')
+            ->groupBy('followers.followed_id')
+            ->groupBy('fol.follower_id')
+            ->select('followers.*','fol.follower_id as fol_id');
 
         $this->addFilters($lists,$filters);
 
@@ -167,11 +171,6 @@ class RallyRepository implements RallyRepositoryInterface {
             ->where('followed_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
-
-        if (array_key_exists('paginate',$filters))
-        {
-            return $lists->paginate($filters['paginate']);
-        }
 
         return $lists;
     }

@@ -117,7 +117,27 @@ class RallyRepositoryTest extends PHPUnit_Framework_TestCase {
 
         $this->follower->shouldReceive('where')
             ->once()
-            ->with('followed_id',1)
+            ->with('followers.followed_id',1)
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('leftJoin')
+            ->once()
+            ->with('followers as fol','followers.follower_id','=','fol.followed_id')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('groupBy')
+            ->once()
+            ->with('followers.followed_id')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('groupBy')
+            ->once()
+            ->with('fol.follower_id')
+            ->andReturn($this->follower);
+
+        $this->follower->shouldReceive('select')
+            ->once()
+            ->with('followers.*','fol.follower_id as fol_id')
             ->andReturn($this->follower);
 
         $mockRepo->shouldReceive('addFilters')
