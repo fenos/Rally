@@ -122,7 +122,6 @@ class RallyRepositoryTest extends PHPUnit_Framework_TestCase {
 
         $this->follower->shouldReceive('leftJoin')
             ->once()
-            ->with('followers as fol','followers.follower_id','=','fol.followed_id')
             ->andReturn($this->follower);
 
         $this->follower->shouldReceive('groupBy')

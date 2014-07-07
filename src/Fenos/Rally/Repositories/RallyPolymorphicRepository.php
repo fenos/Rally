@@ -68,8 +68,8 @@ class RallyPolymorphicRepository extends RallyRepository implements RallyReposit
                               ->where('followers.followed_id',$followed['follower_id'])
                               ->leftJoin('followers as fol',function($join) use ($followed)
                                 {
-                                    $join->on('fol.follower_id','=',$this->db->raw('followers.followed_id'))
-                                        ->where('fol.followed_id','=',$this->db->raw('`followers`.`follower_id`'));
+                                    $join->on('fol.follower_id','=','followers.followed_id')
+                                        ->on('fol.followed_id','=','followers.follower_id');
                                 })
                               ->groupBy('followers.followed_id')
                               ->groupBy('fol.followed_id')
