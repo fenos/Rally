@@ -137,7 +137,7 @@ class RallyRepositoryTest extends PHPUnit_Framework_TestCase {
 
         $this->follower->shouldReceive('select')
             ->once()
-            ->with('followers.*','fol.follower_id as fol_id')
+            ->with('followers.*','fol.follower_id as is_fan')
             ->andReturn($this->follower);
 
         $mockRepo->shouldReceive('addFilters')
