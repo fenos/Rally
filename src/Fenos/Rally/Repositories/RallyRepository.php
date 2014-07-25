@@ -69,6 +69,69 @@ class RallyRepository implements RallyRepositoryInterface {
     }
 
     /**
+     * Get followed lists
+     *
+     * @param array $followed
+     * @param       $filters
+     * @return mixed
+     */
+    public function listsFollowed(array $followed,$filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('followers.follower_id',$followed['follower_id'])
+            ->leftJoin('followers as fol',function($join) use ($followed)
+            {
+                $join->on('fol.follower_id','=','followers.followed_id')
+                    ->on('fol.followed_id','=','followers.follower_id');
+            })
+            ->groupBy('followers.followed_id')
+            ->groupBy('fol.followed_id')
+            ->select('followers.*','fol.follower_id as is_fan');
+
+        $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+
+        return $lists->get();
+    }
+
+    /**
+     * Get followed lists only 1
+     * type
+     *
+     * @param array $followed
+     * @param       $only
+     * @param       $filters
+     * @return mixed
+     */
+    public function listsFollowedOnly(array $followed,$only,$filters)
+    {
+        $lists = $this->follow->with('follower')
+            ->where('followers.follower_id',$followed['follower_id'])
+            ->leftJoin('followers as fol',function($join) use ($followed)
+            {
+                $join->on('fol.follower_id','=','followers.followed_id')
+                    ->on('fol.followed_id','=','followers.follower_id');
+            })
+            ->where('followers.followed_type',$only)
+            ->groupBy('followers.follower_id')
+            ->groupBy('fol.follower_id')
+            ->select('followers.*','fol.follower_id as is_fan');
+
+        $this->addFilters($lists,$filters);
+
+        if (array_key_exists('paginate',$filters))
+        {
+            return $lists->paginate($filters['paginate']);
+        }
+
+        return $lists->get();
+    }
+
+    /**
      * @param array $followed
      * @param $filters
      * @return \Illuminate\Database\Eloquent\Collection|static[]
@@ -82,8 +145,8 @@ class RallyRepository implements RallyRepositoryInterface {
                 $join->on('fol.follower_id','=','followers.followed_id')
                     ->on('fol.followed_id','=','followers.follower_id');
             })
-            ->groupBy('followers.followed_id')
-            ->groupBy('fol.followed_id')
+            ->groupBy('followers.follower_id')
+            ->groupBy('fol.follower_id')
             ->select('followers.*','fol.follower_id as is_fan');
 
         $this->addFilters($lists,$filters);
