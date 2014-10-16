@@ -278,7 +278,7 @@ class Rally {
         else
         {
             // Check if the id is a number and nothing else
-            if (!is_numeric($follower_id)) {
+            if (!is_numeric($follower_type)) {
                 throw new \InvalidArgumentException('The follower Id must be a integer');
             }
         }
