@@ -14,10 +14,10 @@ class CreateFollowersTable extends Migration {
     {
         Schema::create('followers', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('follower_id');
-            $table->string('follower_type');
-            $table->integer('followed_id');
-            $table->string('followed_type');
+            $table->integer('follower_id')->index();
+            $table->string('follower_type')->index();
+            $table->integer('followed_id')->index();
+            $table->string('followed_type')->index();
             $table->timestamps();
         });
     }
