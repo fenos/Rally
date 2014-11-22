@@ -111,7 +111,7 @@ If instead you use **Rally** as normal
 try
 {
     Rally::follower($user_id)->follow($user_id);
-
+}
 catch(\Fenos\Rally\Exceptions\AlreadyFollowerException $e)
 {
     // is already follower
@@ -131,7 +131,7 @@ If you don't want follow someone anymore you will use this method:
 try
 {
     Rally::follower('User',$user_id)->unFollow('Team',$team_id);
-
+}
 catch(\Fenos\Rally\Exceptions\FollowerNotFoundException $e)
 {
     // the user already doesn't follow him
