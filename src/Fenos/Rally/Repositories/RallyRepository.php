@@ -166,7 +166,7 @@ class RallyRepository implements RallyRepositoryInterface {
      */
     public function listsFollowing(array $followed,$filters)
     {
-        $lists = $this->follow->with('follower')
+        $lists = $this->follow->with('followee')
             ->where('follower_id',$followed['follower_id']);
 
         $this->addFilters($lists,$filters);
