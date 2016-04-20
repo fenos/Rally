@@ -59,7 +59,7 @@ class Rally {
         // store the informations on the property
         // if polymorphic is enabled it will store 2 paramets
         // others ways just 1 the ID
-        if ($this->config->get('rally::polymorphic'))
+        if ($this->config->get('messenger.polymorphic'))
         {
             $this->follower['follower_type'] = $follower_type;
             $this->follower['follower_id'] = $follower_id;
@@ -98,7 +98,7 @@ class Rally {
         // check that there are the informations of the follower
         $this->checkFollowerInformation();
 
-        if ($this->config->get('rally::polymorphic') !== false)
+        if ($this->config->get('messenger.polymorphic') !== false)
         {
             $this->follower['followed_type'] = $followed_type;
             $this->follower['followed_id'] = $followed_id;
@@ -127,7 +127,7 @@ class Rally {
         // check that there are the informations of the follower
         $this->checkFollowerInformation();
 
-        if ($this->config->get('rally::polymorphic'))
+        if ($this->config->get('messenger.polymorphic'))
         {
             $this->follower['followed_type'] = $followed_type;
             $this->follower['followed_id'] = $followed_id;
@@ -264,7 +264,7 @@ class Rally {
     {
         // Check if the follower type is a string
         // and nothing else
-        if ($this->config->get('rally::polymorphic'))
+        if ($this->config->get('messenger.polymorphic'))
         {
             if (!is_string($follower_type)) {
                 throw new \InvalidArgumentException('The follower type must be a string');
@@ -293,7 +293,7 @@ class Rally {
     {
         // if the polymorphic option is active we must to check about
         // 2 partameters ID and TYPE if no Just 1 the ID,
-        if ($this->config->get('rally::polymorphic') !== false)
+        if ($this->config->get('messenger.polymorphic') !== false)
         {
             // check that there are the informations of the follower
             if (count($this->follower) < 2) {

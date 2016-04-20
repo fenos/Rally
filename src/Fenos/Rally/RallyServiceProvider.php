@@ -19,7 +19,15 @@ class RallyServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->package('fenos/rally');
+
+        $this->publishes([
+            __DIR__.'/../../config/config.php' => config_path('messenger.php')
+        ], 'config');
+
+        $this->publishes([
+            __DIR__.'/../../migrations/' => database_path('migrations')
+        ], 'migrations');
+
     }
 
     /**
@@ -49,7 +57,7 @@ class RallyServiceProvider extends ServiceProvider {
     {
         $this->app->bind('rally.repository', function($app){
 
-            if ($this->app['config']->get('rally::polymorphic') !== false)
+            if ($this->app['config']->get('messenger.polymorphic') !== false)
             {
                 if (($bindClass = $this->app['config']->get('rally::polymorphic.repository')) == null) {
                     $bindClass = "\Fenos\Rally\Repositories\RallyPolymorphicRepository";
@@ -57,7 +65,7 @@ class RallyServiceProvider extends ServiceProvider {
             }
             else
             {
-                if (($bindClass = $this->app['config']->get('rally::repository')) == null) {
+                if (($bindClass = $this->app['config']->get('messenger.repository')) == null) {
                     $bindClass = "\Fenos\Rally\Repositories\RallyRepository";
                 }
             }

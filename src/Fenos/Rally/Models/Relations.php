@@ -14,7 +14,7 @@ trait Relations {
 
     public function followers()
     {
-        if (\Config::get('rally::polymorphic') === false)
+        if (\Config::get('messenger.polymorphic') === false)
         {
             return $this->hasMany('Fenos\Rally\Models\Follower','followed_id');
         }
@@ -24,7 +24,7 @@ trait Relations {
 
     public function followed()
     {
-        if (\Config::get('rally::polymorphic') === false)
+        if (\Config::get('messenger.polymorphic') === false)
         {
             return $this->hasMany('Fenos\Rally\Models\Follower','follower_id');
         }

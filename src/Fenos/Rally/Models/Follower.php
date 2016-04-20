@@ -19,22 +19,22 @@ class Follower extends Model {
 
     public function follower()
     {
-        if (\Config::get('rally::polymorphic') !== false)
+        if (\Config::get('messenger.polymorphic') !== false)
         {
             return $this->morphTo();
         }
 
-        return $this->belongsTo(\Config::get('rally::model'),'follower_id');
+        return $this->belongsTo(\Config::get('messenger.model'),'follower_id');
     }
 
     public function followed()
     {
-        if (\Config::get('rally::polymorphic') !== false)
+        if (\Config::get('messenger.polymorphic') !== false)
         {
             return $this->morphTo();
         }
 
-        return $this->hasOne(\Config::get('rally::model'),'follower_id');
+        return $this->hasOne(\Config::get('messenger.model'),'follower_id');
     }
 
 }
