@@ -1,4 +1,4 @@
-Rally
+Rally (Deprecated)
 =====
 
 [![Build Status](https://travis-ci.org/fenos/Rally.svg?branch=master)](https://travis-ci.org/fenos/Rally)
