@@ -37,4 +37,13 @@ class Follower extends Model {
         return $this->hasOne(\Config::get('rally::model'),'follower_id');
     }
 
+    public function followee()
+    {
+        if (\Config::get('rally::polymorphic') !== false)
+        {
+            return $this->morphTo();
+        }
+
+        return $this->belongsTo(\Config::get('rally::model'),'followed_id');
+    }
 }
